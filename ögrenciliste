@@ -1,0 +1,93 @@
+class Ogrenci:
+    def __init__(self, ad, soyad, numara, bolum, not_ortalamasi):
+        self.ad = ad
+        self.soyad = soyad
+        self.numara = numara
+        self.bolum = bolum
+        self.not_ortalamasi = not_ortalamasi
+
+    def __str__(self):
+        return f"Numara: {self.numara}, Ad: {self.ad} {self.soyad}, Bölüm: {self.bolum}, Not Ortalaması: {self.not_ortalamasi}"
+
+class OgrenciYonetimSistemi:
+    def __init__(self):
+        self.ogrenciler = {}
+
+    def ogrenci_ekle(self, ogrenci):
+        if ogrenci.numara in self.ogrenciler:
+            print("Bu numaraya sahip bir öğrenci zaten var.")
+        else:
+            self.ogrenciler[ogrenci.numara] = ogrenci
+            print("Öğrenci başarıyla eklendi.")
+
+    def ogrencileri_listele(self):
+        if not self.ogrenciler:
+            print("Sistemde kayıtlı öğrenci bulunmamaktadır.")
+        else:
+            for ogrenci in self.ogrenciler.values():
+                print(ogrenci)
+
+    def ogrenci_goruntule(self, numara):
+        if numara in self.ogrenciler:
+            print(self.ogrenciler[numara])
+        else:
+            print("Bu numaraya sahip bir öğrenci bulunamadı.")
+
+    def ogrenci_guncelle(self, numara):
+        if numara in self.ogrenciler:
+            ogrenci = self.ogrenciler[numara]
+            ogrenci.ad = input("Yeni ad: ")
+            ogrenci.soyad = input("Yeni soyad: ")
+            ogrenci.bolum = input("Yeni bölüm: ")
+            ogrenci.not_ortalamasi = float(input("Yeni not ortalaması: "))
+            print("Öğrenci bilgileri başarıyla güncellendi.")
+        else:
+            print("Bu numaraya sahip bir öğrenci bulunamadı.")
+
+    def ogrenci_sil(self, numara):
+        if numara in self.ogrenciler:
+            del self.ogrenciler[numara]
+            print("Öğrenci başarıyla silindi.")
+        else:
+            print("Bu numaraya sahip bir öğrenci bulunamadı.")
+
+def main():
+    sistem = OgrenciYonetimSistemi()
+
+    while True:
+        print("\nÖğrenci Yönetim Sistemi")
+        print("1. Öğrenci Ekle")
+        print("2. Öğrencileri Listele")
+        print("3. Öğrenci Görüntüle")
+        print("4. Öğrenci Güncelle")
+        print("5. Öğrenci Sil")
+        print("6. Çıkış")
+
+        secim = input("Seçiminizi yapın: ")
+
+        if secim == "1":
+            ad = input("Ad: ")
+            soyad = input("Soyad: ")
+            numara = input("Numara: ")
+            bolum = input("Bölüm: ")
+            not_ortalamasi = float(input("Not Ortalaması: "))
+            ogrenci = Ogrenci(ad, soyad, numara, bolum, not_ortalamasi)
+            sistem.ogrenci_ekle(ogrenci)
+        elif secim == "2":
+            sistem.ogrencileri_listele()
+        elif secim == "3":
+            numara = input("Öğrenci numarası: ")
+            sistem.ogrenci_goruntule(numara)
+        elif secim == "4":
+            numara = input("Öğrenci numarası: ")
+            sistem.ogrenci_guncelle(numara)
+        elif secim == "5":
+            numara = input("Öğrenci numarası: ")
+            sistem.ogrenci_sil(numara)
+        elif secim == "6":
+            break
+        else:
+            print("Geçersiz seçim.")
+
+if __name__ == "__main__":
+    main()
