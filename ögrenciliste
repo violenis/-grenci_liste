@@ -1,3 +1,4 @@
+#def komutu ile fonksiyonumuzu tanımlıyoruz.
 class Ogrenci:
     def __init__(self, ad, soyad, numara, bolum, not_ortalamasi):
         self.ad = ad
